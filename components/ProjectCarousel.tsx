@@ -23,12 +23,12 @@ const ProjectCarousel = () => {
 
   return (
     <section
-        className="relative max-w-lg mx-auto p-6 bg-white rounded-xl shadow-md"
-        style={{ backgroundImage: "url('/images/bg-grey.jpg')", backgroundSize: 'cover' }} // Image de fond gris avec les patterns
+        className="relative max-w-lg mx-auto p-6 bg-white rounded-xl shadow-md dark:bg-blue-950"
+        style={{ backgroundImage: "url('/images/bg-grey.webp')", backgroundSize: 'cover' }} // Image de fond gris avec les patterns
     >
       <div className="flex justify-between items-center mb-4">
         {/* Title */}
-        <h2 className="text-xl font-bold text-black">2 Projets en cours</h2>
+        <h2 className="text-xl font-bold text-black dark:text-white">2 Projets en cours</h2>
 
         {/* Pagination Buttons */}
         <div className="flex space-x-2">

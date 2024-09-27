@@ -26,8 +26,8 @@ const Studies: FC = () => {
   return (
     <div className="pt-4">
       <div className="flex justify-between items-center mb-4">
-      <h2 className="text-xl font-bold text-gray-900">Études</h2>
-        <a href="#" className="flex items-center text-gray-900 hover:underline font-semibold">
+      <h2 className="text-xl font-bold text-gray-900 dark:text-white">Études</h2>
+        <a href="#" className="flex items-center text-gray-900 hover:underline font-semibold dark:text-white">
           Tout voir
           <ChevronRightIcon className="h-5 w-5 ml-1" />
         </a>

@@ -64,7 +64,7 @@ const Sidebar: FC = () => {
 
   return (
     <div
-      className={`h-screen flex flex-col transition-all duration-300 ease-in-out px-4 ${isCollapsed ? "w-20" : "w-64"} bg-gray-900 text-white`}
+      className={`h-screen flex flex-col transition-all duration-00 ease-in-out px-4 ${isCollapsed ? "w-20" : "w-64"} bg-gray-900 text-white dark:bg-blue-950`}
     >
       {/* Header Section */}
       <div className="flex items-center py-4 justify-between">
@@ -119,7 +119,7 @@ const Sidebar: FC = () => {
               {/* Texte et dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center space-x-2 pl-4 pr-2 py-2 bg-gray-800 text-white rounded-md shadow-sm justify-between w-full">
+                  <button className="flex items-center space-x-2 pl-4 pr-2 py-2 bg-gray-800 text-white rounded-md shadow-sm justify-between w-full dark:bg-blue-900">
                     <span className="mr-2">
                       <span role="img" aria-label="taco" className="text-2xl mr-2">
                         🌮
@@ -158,7 +158,7 @@ const Sidebar: FC = () => {
                   href={item.href}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-md ${
                     activeItem === item.name
-                      ? 'bg-activeBlue text-white'
+                      ? 'bg-activeBlue text-white dark:bg-blue-900'
                       : 'text-sidebarText hover:bg-gray-800'
                   }`}
                   onClick={() => setActiveItem(item.name)}
