@@ -24,7 +24,7 @@ const studies = [
 
 const Studies: FC = () => {
   return (
-    <div className="py-4">
+    <div className="pt-4">
       <div className="flex justify-between items-center mb-4">
       <h2 className="text-xl font-bold text-gray-900">Études</h2>
         <a href="#" className="flex items-center text-gray-900 hover:underline font-semibold">
@@ -40,7 +40,7 @@ const Studies: FC = () => {
               alt={study.title}
               width={300}
               height={400}
-              className="object-cover w-full h-70 rounded-lg"
+              className="object-cover w-full h-64 rounded-lg"
             />
           </div>
         ))}

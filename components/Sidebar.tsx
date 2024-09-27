@@ -25,6 +25,7 @@ interface MenuItem {
   name: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   href: string;
+  hasNotification?: boolean;
 }
 
 interface Menu {
@@ -43,7 +44,7 @@ const Sidebar: FC = () => {
         { name: 'Mon Hub', icon: Squares2X2Icon, href: '/hub' },
         { name: 'Mon équipe', icon: UserGroupIcon, href: '/team' },
         { name: 'Agenda', icon: CalendarDaysIcon, href: '/agenda' },
-        { name: 'Notifications', icon: BellIcon, href: '/notifications' },
+        { name: 'Notifications', icon: BellIcon, href: '/notifications', hasNotification: true },
         { name: 'Ressources', icon: BookOpenIcon, href: '/resources' },
       ]
     },
@@ -153,21 +154,22 @@ const Sidebar: FC = () => {
           <ul className="space-y-2">
             {sectionItem.items.map((item) => (
               <li key={item.name}>
-              <a
-                href={item.href}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-md ${
-                  activeItem === item.name
-                    ? 'bg-activeBlue text-white'
-                    : 'text-sidebarText hover:bg-gray-800'
-                }`}
-                onClick={() => setActiveItem(item.name)}
-              >
-                {/* Ajout de flex et items-center pour l'icône */}
-                <span className="flex items-center justify-center">
-                  <item.icon className="h-5 w-5" aria-hidden="true" />
-                </span>
-                {!isCollapsed && <span className="pt-1">{item.name}</span>}
-              </a>
+                <a
+                  href={item.href}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-md ${
+                    activeItem === item.name
+                      ? 'bg-activeBlue text-white'
+                      : 'text-sidebarText hover:bg-gray-800'
+                  }`}
+                  onClick={() => setActiveItem(item.name)}
+                >
+                  {/* Ajout de flex et items-center pour l'icône */}
+                  <span className="flex items-center justify-center relative">
+                      <item.icon className="h-5 w-5" aria-hidden="true" />
+                      {item.hasNotification && <span className="absolute top-0 right-0 block h-1.5 w-1.5 bg-red-500 rounded-full ring-2 ring-gray-900" />}
+                  </span>
+                  {!isCollapsed && <span className="pt-1">{item.name}</span>}
+                </a>
             </li>
             ))}
           </ul>

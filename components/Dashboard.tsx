@@ -16,9 +16,9 @@ const Dashboard = () => {
         </div>
 
         {/* Colonne de droite */}
-        <div className="col-span-8 space-y-6">
-          <GrowthTools />
-          <Studies />
+        <div className="col-span-8 flex flex-col justify-between h-full">
+            <GrowthTools />
+            <Studies />
         </div>
       </div>
     </div>
