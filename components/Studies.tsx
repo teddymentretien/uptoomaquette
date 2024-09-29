@@ -1,12 +1,16 @@
-// components/Studies.tsx
 import { FC } from 'react';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
-import Image from 'next/image'; // Utilisation de Next.js pour l'optimisation des images
+import Image from 'next/image';
 
-const studies = [
+interface Study {
+	title: string,
+	imageUrl: string
+}
+
+const studies: Study[] = [
   {
     title: 'Les tendances du marché du recrutement de commerciaux',
-    imageUrl: '/images/uptoo1.webp', // Remplacer par le chemin des images
+    imageUrl: '/images/uptoo1.webp',
   },
   {
     title: 'Combien gagnent réellement les commerciaux en 2024 ?',

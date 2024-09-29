@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import ProjectCard from '@/components/ProjectCard'; // Utiliser la même carte pour chaque élément du carousel
+import React, { FC, useState } from 'react';
+import ProjectCard from '@/components/ProjectCard';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { Button } from "@/components/ui/button";
 
-const ProjectCarousel = () => {
+const ProjectCarousel: FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const projects = [
+  const projects: React.ReactElement[] = [
     <ProjectCard key="1" />,
     <ProjectCard key="2" />
   ];
@@ -23,14 +22,11 @@ const ProjectCarousel = () => {
 
   return (
     <section
-        className="relative max-w-lg mx-auto p-6 bg-white rounded-xl shadow-md dark:bg-blue-950"
-        style={{ backgroundImage: "url('/images/bg-grey.webp')", backgroundSize: 'cover' }} // Image de fond gris avec les patterns
+      className="relative max-w-lg mx-auto p-6 bg-white rounded-xl shadow-md dark:bg-blue-950"
+      style={{ backgroundImage: "url('/images/bg-grey.webp')", backgroundSize: 'cover' }}
     >
       <div className="flex justify-between items-center mb-4">
-        {/* Title */}
         <h2 className="text-xl font-bold text-black dark:text-white">2 Projets en cours</h2>
-
-        {/* Pagination Buttons */}
         <div className="flex space-x-2">
           <Button
             onClick={handlePrev}
@@ -48,14 +44,12 @@ const ProjectCarousel = () => {
           </Button>
         </div>
       </div>
-
-      {/* Carousel Content */}
       <div className="w-full overflow-hidden">
         <div
           className="transition-transform ease-in-out duration-300"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          <div className="flex space-x-4">
+          <div className="flex">
             {projects.map((project, index) => (
               <div
                 key={index}

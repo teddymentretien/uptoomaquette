@@ -18,7 +18,6 @@ const ProjectCard: FC = () => {
 
   return (
     <div className="relative w-[95%]">
-      {/* Carte principale */}
       <Card className="relative z-10 bg-blue-500 text-white w-full p-3 rounded-lg border-none dark:bg-blue-900">
         <CardHeader className="flex flex-col space-y-2 p-4">
           <div className="flex items-center justify-between mb-2">
@@ -30,7 +29,6 @@ const ProjectCard: FC = () => {
             Lancée le 12/01/23
           </CardDescription>
         </CardHeader>
-
         <CardContent className="py-0 px-3 mb-3 space-y-1">
           {cardsData.map((cardData) => (
             <div key={cardData.title} className="bg-white text-black rounded-lg p-4 px-6 dark:bg-gray-300">
@@ -52,7 +50,6 @@ const ProjectCard: FC = () => {
           ))}
         </CardContent>
       </Card>
-
       <div className="absolute top-0 bottom-0 m-auto right-[-15px] w-8 h-[86%] bg-[#7aa4f6] rounded-xl z-0 dark:bg-gray-300"></div>
     </div>
   );

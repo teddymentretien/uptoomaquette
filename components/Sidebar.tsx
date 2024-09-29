@@ -1,24 +1,9 @@
 import { FC, useState } from "react";
-import { 
-  Squares2X2Icon,
-  UserGroupIcon,
-  CalendarDaysIcon,
-  BellIcon,
-  BookOpenIcon,
-  MagnifyingGlassCircleIcon,
-  Square3Stack3DIcon,
-  EllipsisVerticalIcon,
-  ChevronUpDownIcon,
-  ArrowLongLeftIcon
-} from '@heroicons/react/24/solid';
+import { Squares2X2Icon, UserGroupIcon, CalendarDaysIcon, BellIcon, BookOpenIcon, MagnifyingGlassCircleIcon, Square3Stack3DIcon, EllipsisVerticalIcon, ChevronUpDownIcon, ArrowLongLeftIcon } from '@heroicons/react/24/solid';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
-import Link from "next/link"; // Pour les liens externes
+import Link from "next/link";
 import ThemeSelector from "./ThemeSelector";
 
 interface MenuItem {
@@ -57,31 +42,27 @@ const Sidebar: FC = () => {
     },
   ];  
 
-  // Fonction pour rétracter la sidebar
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   }
 
   return (
     <div
-      className={`h-screen flex flex-col transition-all duration-00 ease-in-out px-4 ${isCollapsed ? "w-20" : "w-64"} bg-gray-900 text-white dark:bg-blue-950`}
+      className={`h-screen flex flex-col transition-all duration-00 ease-in-out px-4 ${isCollapsed ? "w-20" : "w-60"} bg-gray-900 text-white dark:bg-blue-950`}
     >
-      {/* Header Section */}
-      <div className="flex items-center py-4 justify-between">
+      <div className="flex items-center py-4 justify-between mt-2">
         {
           !isCollapsed &&
           <div className="flex items-center space-x-2">
-            {/* Image placeholder */}
-              <Image
-                src="/images/logo.png" // Remplacer par le chemin réel de l'image de profil
-                alt="Uptoo Logo"
-                width={70}
-                height={70}
-                className="rounded-full object-cover"
-              />
+            <Image
+              src="/images/logo.png"
+              alt="Uptoo Logo"
+              width={70}
+              height={70}
+              className="rounded-full object-cover"
+            />
           </div>
         }
-        {/* Bouton pour rétracter */}
         <button
           onClick={toggleSidebar}
           className={`rounded-full bg-gray-700 hover:bg-gray-600 text-white ${isCollapsed && "mx-auto"}`}
@@ -90,9 +71,7 @@ const Sidebar: FC = () => {
         </button>
       </div>
 
-      {/* User Info */}
       <div className={`flex items-center justify-between mb-2 ${isCollapsed && "mx-auto"}`}>
-        {/* Image de profil */}
         <div className="flex items-center space-x-3">
           <div className="relative">
             <Avatar>
@@ -107,26 +86,24 @@ const Sidebar: FC = () => {
           )}
         </div>
         {!isCollapsed && (
-          <EllipsisVerticalIcon className={`size-7 transition-transform ${isCollapsed ? "rotate-180" : ""}`} />
+          <EllipsisVerticalIcon className={`size-6 text-gray-500 transition-transform ${isCollapsed ? "rotate-180" : ""}`} />
         )}
       </div>
 
-      {/* Workspace Selector */}
       <div className="flex items-center mb-4 ">
         <div className="flex items-center space-x-2 w-full">
           {!isCollapsed && (
             <div className="flex items-center space-x-2 w-full">
-              {/* Texte et dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center space-x-2 pl-4 pr-2 py-2 bg-gray-800 text-white rounded-md shadow-sm justify-between w-full dark:bg-blue-900">
+                  <button className="flex items-center space-x-2 p-2 bg-gray-800 text-white rounded-md shadow-sm justify-between w-full dark:bg-blue-900">
                     <span className="mr-2">
-                      <span role="img" aria-label="taco" className="text-2xl mr-2">
+                      <span role="img" aria-label="taco" className="text-[20px] mr-2">
                         🌮
                       </span>
                       Nom du workspace
                     </span>
-                    <ChevronUpDownIcon className="h-5 w-5 pr-0" />
+                    <ChevronUpDownIcon className="size-4 pr-0" />
                   </button>
                 </DropdownMenuTrigger>
                 
@@ -141,7 +118,6 @@ const Sidebar: FC = () => {
         </div>
       </div>
 
-      {/* Navigation Links */}
       {menuItems.map((sectionItem) => (
         <div className="mb-4">
           {
@@ -150,25 +126,23 @@ const Sidebar: FC = () => {
               {sectionItem.title}
             </div>
           }
-
-          <ul className="space-y-2">
+          <ul className="space-y-1">
             {sectionItem.items.map((item) => (
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-md ${
+                  className={`flex items-center space-x-2 p-2 rounded-md ${
                     activeItem === item.name
                       ? 'bg-activeBlue text-white dark:bg-blue-900'
                       : 'text-sidebarText hover:bg-gray-800'
                   }`}
                   onClick={() => setActiveItem(item.name)}
                 >
-                  {/* Ajout de flex et items-center pour l'icône */}
                   <span className="flex items-center justify-center relative">
-                      <item.icon className="h-5 w-5" aria-hidden="true" />
-                      {item.hasNotification && <span className="absolute top-0 right-0 block h-1.5 w-1.5 bg-red-500 rounded-full ring-2 ring-gray-900" />}
+                    <item.icon className="h-5 w-5" aria-hidden="true" />
+                    {item.hasNotification && <span className="absolute top-0 right-0 block h-1.5 w-1.5 bg-red-500 rounded-full ring-2 ring-gray-900" />}
                   </span>
-                  {!isCollapsed && <span className="pt-1">{item.name}</span>}
+                  {!isCollapsed && <span className="pt-1 font-semibold">{item.name}</span>}
                 </a>
             </li>
             ))}
@@ -181,11 +155,10 @@ const Sidebar: FC = () => {
         <div className="mt-4">
           <h3 className="text-gray-400 text-xs font-semibold uppercase mb-2">THÈME</h3>
           <ThemeSelector />
-
-        <Link href="#" className="text-sm dark:text-gray-400 text-gray-600 underline">
-          {!isCollapsed && "Un problème ?"}
-        </Link>
-      </div>
+          <Link href="#" className="text-sm dark:text-gray-400 text-gray-600 underline">
+            {!isCollapsed && "Un problème ?"}
+          </Link>
+        </div>
       }
     </div>
   );
