@@ -49,7 +49,7 @@ const ProjectCarousel: FC = () => {
            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           <div className="flex">
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <div
                 key={uuidv4()}
                 className="flex-shrink-0 w-full min-w-full"
