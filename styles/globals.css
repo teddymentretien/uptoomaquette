@@ -19,7 +19,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 @layer utilities {
@@ -81,6 +81,10 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+  }
+
+  .bg-gray-uptoo {
+    background-color: #28292e;
   }
 }
 

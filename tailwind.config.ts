@@ -51,23 +51,23 @@ const config: Config = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			},
-			activeBlue: '#2f69f1', // Couleur bleue active
-			sidebarText: '#A1A1AA', // Texte des éléments non actifs
+			activeBlue: '#2f69f1',
+			activeGray: '#3e414a',
+			sidebarText: '#A1A1AA',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)',
-			xl: '1.5rem',
-			xxl: '3rem'
+				xl: '1rem',
+				xxl: '2rem'
   		},
 		fontSize: {
-			// Ajuster les tailles globales des polices
-			sm: ['12px', '18px'], // Small Text
-			base: ['14px', '20px'],  // Texte par défaut
-			lg: ['16px', '24px'],  // Grand texte
-			xl: ['18px', '26px'],  // Très grand texte
-			'2xl': ['20px', '28px'],  // Titre
+			sm: ['12px', '18px'],
+			base: ['14px', '20px'], 
+			lg: ['16px', '24px'], 
+			xl: ['18px', '26px'], 
+			'2xl': ['20px', '28px'], 
 		},
   	}
   },

@@ -14,11 +14,11 @@ const ThemeSelector: FC = () => {
     };
 
     return (
-      <div className="flex items-center space-x-2 bg-gray-800 p-1 rounded-full w-fit mb-5">
+      <div className="flex items-center space-x-2 bg-[#202126] px-1 py-1 rounded-full w-fit mb-5">
         <button
           onClick={toggleTheme}
-          className={`flex items-center space-x-1 px-2 py-1 rounded-full transition ${
-            !darkMode ? 'bg-gray-700 text-white' : 'text-gray-400'
+          className={`flex items-center space-x-1 px-2 py-0 rounded-full transition ${
+            !darkMode ? 'bg-activeGray text-white' : 'bg-[#202126] text-gray-400'
           }`}
         >
           <SunIcon className="h-4 w-4 mr-1" />
@@ -26,8 +26,8 @@ const ThemeSelector: FC = () => {
         </button>
         <button
           onClick={toggleTheme}
-          className={`flex items-center space-x-1 px-2 py-1 rounded-full transition ${
-            darkMode ? 'bg-gray-700 text-white' : 'text-gray-400'
+          className={`flex items-center space-x-1 px-2 py-0 rounded-full transition ${
+            darkMode ? 'bg-activeGray text-white' : 'text-gray-400'
           }`}
         >
           <MoonIcon className="h-4 w-4 mr-1" />

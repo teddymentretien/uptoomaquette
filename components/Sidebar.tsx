@@ -1,10 +1,12 @@
-import { FC, useState } from "react";
-import { Squares2X2Icon, UserGroupIcon, CalendarDaysIcon, BellIcon, BookOpenIcon, MagnifyingGlassCircleIcon, Square3Stack3DIcon, EllipsisVerticalIcon, ChevronUpDownIcon, ArrowLongLeftIcon } from '@heroicons/react/24/solid';
+import { FC, useState, useEffect } from "react";
+import { ArrowLeftIcon, Squares2X2Icon, UserGroupIcon, CalendarDaysIcon, BellIcon, BookOpenIcon, MagnifyingGlassCircleIcon, Square3Stack3DIcon, EllipsisVerticalIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { v4 as uuidv4 } from 'uuid';
 import Image from "next/image";
 import Link from "next/link";
 import ThemeSelector from "./ThemeSelector";
+import { Button } from "./ui/button";
 
 interface MenuItem {
   name: string;
@@ -21,6 +23,13 @@ interface Menu {
 const Sidebar: FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState<string>('Mon Hub');
+
+  const handleResize = () => {
+    const isMobileOrTablet = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobileOrTablet) {
+      setIsCollapsed(isMobileOrTablet);
+    }
+  };
 
   const menuItems: Menu[] = [
     {
@@ -46,16 +55,22 @@ const Sidebar: FC = () => {
     setIsCollapsed(!isCollapsed);
   }
 
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div
-      className={`h-screen flex flex-col transition-all duration-00 ease-in-out px-4 ${isCollapsed ? "w-20" : "w-60"} bg-gray-900 text-white dark:bg-blue-950`}
+      className={`h-screen flex flex-col transition-all duration-00 ease-in-out px-4 ${isCollapsed ? "w-20" : "w-60"} bg-gray-uptoo text-white dark:bg-blue-950`}
     >
-      <div className="flex items-center py-4 justify-between mt-2">
+      <div className="flex items-center py-4 justify-between">
         {
           !isCollapsed &&
           <div className="flex items-center space-x-2">
             <Image
-              src="/images/logo.png"
+              src="/images/logo.webp"
               alt="Uptoo Logo"
               width={70}
               height={70}
@@ -63,12 +78,14 @@ const Sidebar: FC = () => {
             />
           </div>
         }
-        <button
+        <Button
           onClick={toggleSidebar}
-          className={`rounded-full bg-gray-700 hover:bg-gray-600 text-white ${isCollapsed && "mx-auto"}`}
+          size="icon"
+          className={`relative size-6 rounded-full bg-gray-700 hover:bg-gray-600 text-white ${isCollapsed && "mx-auto"}`}
         >
-          <ArrowLongLeftIcon className={`size-7 p-1 transition-transform ${isCollapsed ? "rotate-180" : ""}`} />
-        </button>
+          <ArrowLeftIcon className={`size-7 p-1 transition-transform ${isCollapsed ? "rotate-180" : ""}`} />
+          {/* <span className="absolute text-[5px] h-[12px] font-thin bg-white right-1 top-0 bottom-0 m-auto">|</span> */}
+        </Button>
       </div>
 
       <div className={`flex items-center justify-between mb-2 ${isCollapsed && "mx-auto"}`}>
@@ -90,23 +107,23 @@ const Sidebar: FC = () => {
         )}
       </div>
 
-      <div className="flex items-center mb-4 ">
+      <div className="flex items-center mb-4">
         <div className="flex items-center space-x-2 w-full">
           {!isCollapsed && (
             <div className="flex items-center space-x-2 w-full">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center space-x-2 p-2 bg-gray-800 text-white rounded-md shadow-sm justify-between w-full dark:bg-blue-900">
-                    <span className="mr-2">
-                      <span role="img" aria-label="taco" className="text-[20px] mr-2">
+                  <Button className="flex items-center justify-between p-2 py-2 bg-[#3f414d] hover:bg-[#3f414d] text-white rounded-md shadow-sm w-full dark:bg-blue-900">
+                    <div className="flex items-center space-x-2">
+                      <span role="img" aria-label="taco" className="text-[22px]">
                         🌮
                       </span>
-                      Nom du workspace
-                    </span>
-                    <ChevronUpDownIcon className="size-4 pr-0" />
-                  </button>
+                      <span>Nom du workspace</span>
+                    </div>
+                    <ChevronUpDownIcon className="w-5 h-5" />
+                  </Button>
                 </DropdownMenuTrigger>
-                
+
                 <DropdownMenuContent className="bg-gray-800 text-white p-2 rounded-md shadow-lg">
                   <DropdownMenuItem>Workspace 1</DropdownMenuItem>
                   <DropdownMenuItem>Workspace 2</DropdownMenuItem>
@@ -118,32 +135,33 @@ const Sidebar: FC = () => {
         </div>
       </div>
 
+
       {menuItems.map((sectionItem) => (
-        <div className="mb-4">
+        <div className="mb-5" key={uuidv4()}>
           {
             !isCollapsed &&
-            <div className="text-xs font-bold tracking-wide text-gray-400 uppercase py-2">
+            <div className="text-xs font-bold tracking-wide text-gray-400 uppercase py-1">
               {sectionItem.title}
             </div>
           }
           <ul className="space-y-1">
             {sectionItem.items.map((item) => (
-              <li key={item.name}>
-                <a
+              <li key={uuidv4()}>
+                <Link
                   href={item.href}
                   className={`flex items-center space-x-2 p-2 rounded-md ${
                     activeItem === item.name
-                      ? 'bg-activeBlue text-white dark:bg-blue-900'
-                      : 'text-sidebarText hover:bg-gray-800'
+                      ? 'bg-activeBlue text-white'
+                      : 'text-[#616e7f] hover:bg-[#202126] dark:hover:bg-blue-900'
                   }`}
                   onClick={() => setActiveItem(item.name)}
                 >
-                  <span className="flex items-center justify-center relative">
+                  <span className={`relative ${isCollapsed && "mx-auto"}`}>
                     <item.icon className="h-5 w-5" aria-hidden="true" />
-                    {item.hasNotification && <span className="absolute top-0 right-0 block h-1.5 w-1.5 bg-red-500 rounded-full ring-2 ring-gray-900" />}
+                    {item.hasNotification && <span className="absolute top-0 right-0 block h-1.5 w-1.5 bg-red-500 ring-1 ring-gray-900 rounded-full" />}
                   </span>
                   {!isCollapsed && <span className="pt-1 font-semibold">{item.name}</span>}
-                </a>
+                </Link>
             </li>
             ))}
           </ul>
@@ -152,7 +170,7 @@ const Sidebar: FC = () => {
 
       {
         !isCollapsed &&
-        <div className="mt-4">
+        <div className="mt-2">
           <h3 className="text-gray-400 text-xs font-semibold uppercase mb-2">THÈME</h3>
           <ThemeSelector />
           <Link href="#" className="text-sm dark:text-gray-400 text-gray-600 underline">
